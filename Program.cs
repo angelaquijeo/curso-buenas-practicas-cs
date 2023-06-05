@@ -5,11 +5,10 @@ namespace ToDo
 {
     internal class Program
     {
-        public static List<string> TaskList { get; set; }
+        public static List<string> TaskList { get; set; } = new List<string>();
 
         static void Main(string[] args)
         {
-            TaskList = new List<string>();
             int menuSelected = 0;
             do
             {
@@ -65,7 +64,7 @@ namespace ToDo
                     {
                         string taskRemoved = TaskList[indexToRemove];
                         TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + taskRemoved + " eliminada");
+                        Console.WriteLine($"Tarea {taskRemoved} eliminada");
                     }
                 }
                 /*ESTE CODIGO LO HICE YO, pero me manda al catch cuando no es correcto el numero
@@ -106,13 +105,13 @@ namespace ToDo
 
         public static void ShowMenuTaskList()
         {
-            if (TaskList == null || TaskList.Count == 0)
+            if (TaskList?.Count > 0)
             {
-                Console.WriteLine("No hay tareas por realizar");
+                TaskListMethod();
             } 
             else
             {
-                TaskListMethod();
+                Console.WriteLine("No hay tareas por realizar");
             }
         }
 
@@ -120,7 +119,7 @@ namespace ToDo
         {
             Console.WriteLine("----------------------------------------");
             var indexTask = 0;
-            TaskList.ForEach(p=> Console.WriteLine(++indexTask + "." + p));
+            TaskList.ForEach(p=> Console.WriteLine($"{++indexTask}. {p}"));
             Console.WriteLine("----------------------------------------");
         }
     }
